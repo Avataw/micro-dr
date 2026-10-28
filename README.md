@@ -1,11 +1,11 @@
 # micro-dr
 
-Agent skills for micro decision records.
+An agent skill for micro decision records.
 
 Most decisions in a project are small, e.g. which library to use or how a button behaves. They rarely get an ADR, so the reason behind them is gone once the PR is merged.
-micro-dr records them while you work and distills them into learnings your team and your agents can reuse.
+micro-dr records them while you work, in a personal store outside the repo, and distills them into the repo before you push: learnings for your agent files, ADRs, doc updates and a decisions section for the PR. Decisions that hold across projects are copied into a global part of the store and travel with you.
 
-The skills follow the [Agent Skills](https://agentskills.io) format, so any agent that supports it can use them.
+The skill follows the [Agent Skills](https://agentskills.io) format, so any agent that supports it can use it. It needs git, and your agent needs write access to the store.
 
 ## Install
 
@@ -15,47 +15,47 @@ npx skills add Avataw/micro-dr
 
 ## Usage
 
-`micro-dr` is one skill with five subcommands, e.g. `/micro-dr track` in Claude Code. The exact syntax depends on your agent.
+`micro-dr` is one skill with six subcommands, e.g. `/micro-dr track` in Claude Code. In agents without slash commands, ask in plain words, e.g. "use micro-dr to record that we picked SQLite over IndexedDB because ...".
 
 | Subcommand | What it does |
 |---|---|
-| `track` | Records a decision. Your agent also offers this when a decision comes up while working. |
-| `distill` | Reads the records of the current branch and suggests learnings for your agent file (AGENTS.md, CLAUDE.md, ...), plus decisions that should move up, e.g. into your global ADRs. |
-| `verify` | Checks every accepted record against the current code. |
-| `inspect` | Explains one decision: where it comes from, its history and related decisions. |
-| `setup` | Optional. Sets storage, formats and where learnings go. |
+| `track` | Records decisions automatically as they come up while you work, or when you ask, and lists them at the end of the task. Also accepts, rejects or drops one. |
+| `inspect` | Explains why something was decided, and on request its full history and related decisions. |
+| `list` | Lists decisions by text, status, type, tag, path, date or branch, or exports them. |
+| `distill` | Before you push: turns undistilled decisions into learnings, ADRs, doc updates and a PR section, and proposes global decisions. `distill global` compares all your projects. |
+| `verify` | Lints the store and checks every accepted decision against the current code. |
+| `setup` | Creates the store, registers the project, offers a line for your user-level agent file so your agent knows to use micro-dr, and offers a reminder before `git push`. |
 
-## A record
+## The store
 
-```markdown
----
-id: mdr-20261028-sqlite-cache
-type: technical
-status: accepted
-tags: [storage, offline]
----
-
-# Use SQLite for the offline cache
-
-In the context of offline support, facing unreliable connectivity, we decided to store offline data only in SQLite to keep sync simple, accepting a native dependency.
+```
+~/.micro-dr/                    # or $MICRO_DR_HOME; a git repo of its own
+├── config.yml
+├── global/{technical,product,design}.md
+└── projects/github.com/acme/shop/
+    ├── project.yml
+    ├── technical.md
+    ├── product.md
+    ├── design.md
+    └── archive.md
 ```
 
-We keep the frontmatter minimal. Everything else comes from where the record lives and from git:
+No store file, id or mention of micro-dr ever lands in the repo. The repo only changes where you agree to it, mostly through `distill`, in the repo's own words.
 
-- The folder is the scope. A record in `src/storage/.micro-dr/` is about `src/storage`.
-- Origin, author and history come from `git log`.
-- Links between decisions are optional and live in `.micro-dr/graph.yml`.
+Each file is a list of entries in a fixed shape, written for agents to grep and edit:
 
-## Formats
+```markdown
+## mdr-20261028-ky-client · accepted · Use ky as the shared HTTP client
+- applies-to: src/api/**
+- tags: http, retry
+- decision: All HTTP calls go through the ky instance in src/api/client.ts, retrying 3x with backoff, POST included.
+- why: The upstream rate-limits us; ky adds retries on fetch for 4 kB.
+- rejected: axios (no built-in retry), got (Node-only)
+- accepting: A retried POST can run twice.
+- recorded: 2026-10-28 · feat/retrying-client · 3f2a1c9
+```
 
-Y-statement is the default. Nygard, MADR, product and freeform are included, and each type can use its own.
-Custom templates go into `.micro-dr/templates/`.
-
-## Storage
-
-- `colocated` (default): records live next to the code they are about.
-- `central`: everything lives in `.micro-dr/`, in folders that mirror the repo.
-- `private`: like `central`, but kept out of git via `.git/info/exclude`.
+Give the store a private remote: it holds what you decided for clients and employers.
 
 ## License
 

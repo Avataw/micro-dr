@@ -1,7 +1,0 @@
-# <title>
-
-## Context
-
-## Decision
-
-## Consequences

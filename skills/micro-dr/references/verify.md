@@ -15,7 +15,7 @@ Across the store, report:
 
 ## 2. Claims
 
-Check each accepted entry of the project in `technical.md`, `product.md` and `design.md`. Start at its `applies-to`, then follow what `decision` names across the repo: callers, routes, config, docs. An exception stated by an accepted entry that `narrows` it is not a finding.
+Check each accepted entry of the project in `technical.md`, `product.md`, `design.md` and `practice.md`. Start at its `applies-to`, then follow what `decision` names across the repo: callers, routes, config, docs. An exception stated by an accepted entry that `narrows` it is not a finding.
 
 Every failing result names the entry's `recorded` branch, so the user can tell work from another branch apart from real drift.
 

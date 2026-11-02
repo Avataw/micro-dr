@@ -10,12 +10,14 @@ The store is `$MICRO_DR_HOME`, else `~/.micro-dr`. It's a git repo of its own an
 ├── global/                     # decisions that hold across projects
 │   ├── technical.md
 │   ├── product.md
-│   └── design.md
+│   ├── design.md
+│   └── practice.md
 └── projects/<key>/
     ├── project.yml
     ├── technical.md            # architectural decisions too, tagged `architecture`
     ├── product.md
     ├── design.md
+    ├── practice.md
     └── archive.md              # superseded and rejected entries
 ```
 
@@ -51,6 +53,7 @@ Type files:
 - `technical`: how code is built, and how areas fit together (tag those `architecture`).
 - `product`: what the product does and for whom (scope, pricing, limits, support).
 - `design`: what users see and how the UI behaves.
+- `practice`: how the work is done (reviews, PRs, writing, comments, testing habits, tooling, where decisions and docs live). Global when it names none of a project's code, domain, team or customers.
 
 Heading: `## <id> · <status> · <title>`.
 
@@ -71,7 +74,7 @@ Lines, in this order. `applies-to`, `tags`, `recorded` and `distilled` are fille
 | `decided-by` | Who decided, when it wasn't the user |
 | `decided` | `<YYYY-MM-DD>`, when the decision predates the entry |
 | `pending` | What still has to change in the code or docs |
-| `recorded` | `<YYYY-MM-DD> · <branch> · <short project HEAD sha>` |
+| `recorded` | `<YYYY-MM-DD> · <branch> · <short project HEAD sha>`, or `<YYYY-MM-DD> · <project key>` in `global/`, or just the date outside a repo |
 | `distilled` | `<target> "<section>" (<YYYY-MM-DD>)`, one line per target, or `none (<YYYY-MM-DD>)`, or `withdrawn (<YYYY-MM-DD>)` |
 
 Find entries with `grep -n '^## ' <files>`: the headings are the index. Read an entry from its heading to the next `## `.

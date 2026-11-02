@@ -8,7 +8,7 @@ project=$(grep -rl --include=project.yml "^root: $root" "$store/projects" 2>/dev
 [ -n "$project" ] || exit 0
 dir=$(dirname "$project")
 set --
-for f in "$dir"/technical.md "$dir"/product.md "$dir"/design.md; do
+for f in "$dir"/technical.md "$dir"/product.md "$dir"/design.md "$dir"/practice.md; do
   [ -f "$f" ] && set -- "$@" "$f"
 done
 [ $# -gt 0 ] || exit 0

@@ -2,8 +2,8 @@
 
 An agent skill for micro decision records.
 
-Most decisions in a project are small, e.g. which library to use or how a button behaves. They rarely get an ADR, so the reason behind them is gone once the PR is merged.
-micro-dr records them while you work, in a personal store outside the repo, and distills them into the repo before you push: learnings for your agent files, ADRs, doc updates and a decisions section for the PR. Decisions that hold across projects are copied into a global part of the store and travel with you.
+Most decisions in a project are small, e.g. which library to use or how a button behaves. Others are about how you work, e.g. how a PR description reads or where decisions are written down. They rarely get an ADR, so the reason behind them is gone once the PR is merged.
+micro-dr records them while you work, in a personal store outside the repo, and distills them into the repo before you push: learnings for your agent files, ADRs, doc updates and a decisions section for the PR. Decisions that hold across projects are copied into a global part of the store and travel with you, and decisions about how you work go there directly and are distilled into your user-level agent files.
 
 The skill follows the [Agent Skills](https://agentskills.io) format, so any agent that supports it can use it. It needs git, and your agent needs write access to the store.
 
@@ -31,12 +31,13 @@ npx skills add Avataw/micro-dr
 ```
 ~/.micro-dr/                    # or $MICRO_DR_HOME; a git repo of its own
 ├── config.yml
-├── global/{technical,product,design}.md
+├── global/{technical,product,design,practice}.md
 └── projects/github.com/acme/shop/
     ├── project.yml
     ├── technical.md
     ├── product.md
     ├── design.md
+    ├── practice.md
     └── archive.md
 ```
 

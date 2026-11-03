@@ -17,9 +17,10 @@ Ask one question at a time in plain words, proposing the default; the user may s
 
 6. Writing to the store needs access outside the workspace. Tell the user how their agent grants it, e.g. Claude Code's `additionalDirectories` setting or `/add-dir`.
 7. Which user-level agent files or skills receive global learnings; save them as `learnings` in the store's `config.yml`.
-8. Offer to add this line to the user-level agent file, never to a repo file: "Decisions are kept with the micro-dr skill. Use it to answer why something was decided, record decisions with micro-dr track whenever a change settles a choice between options, and run micro-dr distill before pushing or opening a pull request."
-9. Whether decisions are recorded automatically (default) or only offered; save `tracking: offer` in the store's `config.yml` for the latter.
-10. Offer a reminder before `git push`: copy `assets/pre-push.sh` to `$(git rev-parse --git-path hooks)/pre-push` and make it executable. Skip this when a pre-push hook exists or `core.hooksPath` is set, and say why. The hook only warns, never blocks, and is never committed.
+8. Where project learnings go: the repo (default), or a folder in the user's workspace so the repo stays untouched, proposing the user-level folder of their agent, e.g. `~/.claude/micro-dr` for Claude Code. Save the folder as `workspace` in the store's `config.yml`. With a folder, offer to add this line to the user-level agent file: "Before working in a repo, read its decisions in <workspace>/<project key>.md, the key being its origin remote without protocol and `.git`."
+9. Offer to add this line to the user-level agent file, never to a repo file: "Decisions are kept with the micro-dr skill. Use it to answer why something was decided, record decisions with micro-dr track whenever a change settles a choice between options, and run micro-dr distill before pushing or opening a pull request."
+10. Whether decisions are recorded automatically (default) or only offered; save `tracking: offer` in the store's `config.yml` for the latter.
+11. Offer a reminder before `git push`: copy `assets/pre-push.sh` to `$(git rev-parse --git-path hooks)/pre-push` and make it executable. Skip this when a pre-push hook exists or `core.hooksPath` is set, and say why. The hook only warns, never blocks, and is never committed.
 
 Commit the store.
 

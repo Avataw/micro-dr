@@ -6,7 +6,7 @@ The store is `$MICRO_DR_HOME`, else `~/.micro-dr`. It's a git repo of its own an
 
 ```
 ~/.micro-dr/
-├── config.yml                  # learnings: user-level agent files or skills; tracking: auto (default) or offer
+├── config.yml                  # learnings: user-level agent files or skills; workspace: folder for project learnings; tracking: auto (default) or offer
 ├── global/                     # decisions that hold across projects
 │   ├── technical.md
 │   ├── product.md
@@ -30,6 +30,8 @@ root: 3f2a1c9e8d7b6a5f4e3d2c1b0a9f8e7d6c5b4a39   # full sha: last line of `git r
 adr: docs/adr         # the repo's ADR folder, or null
 learnings: []         # repo files that receive learnings; empty: the root agent file
 ```
+
+`workspace` in `config.yml` is a folder in the user's workspace, outside every repo, e.g. `~/.claude/micro-dr`. When it's set, a project's learnings go to `<workspace>/<key>.md` instead of the repo; unset, they go to the repo. Expand `~` to an absolute path.
 
 To find the project, look for `projects/<key>/` and check that its `root` matches. When it's missing or doesn't match, search `projects/**/project.yml` for this repo's `root`; a match means the remote changed, so use that folder and tell the user. In a shallow clone the root is wrong; say so instead of creating a project.
 

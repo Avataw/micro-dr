@@ -56,6 +56,8 @@ Each file is a list of entries in a fixed shape, written for agents to grep and 
 - recorded: 2026-10-28 · feat/retrying-client · 3f2a1c9
 ```
 
+To keep the repo untouched, set `workspace` in `config.yml` to a folder outside every repo, e.g. `~/.claude/micro-dr`. `distill` then writes each project's learnings to `<workspace>/<project key>.md` and changes the repo only when you ask.
+
 Give the store a private remote: it holds what you decided for clients and employers.
 
 ## License

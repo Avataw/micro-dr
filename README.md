@@ -22,7 +22,7 @@ npx skills add Avataw/micro-dr
 | `track` | Records decisions automatically as they come up while you work, or when you ask, and lists them at the end of the task. Also accepts, rejects or drops one. |
 | `inspect` | Explains why something was decided, and on request its full history and related decisions. |
 | `list` | Lists decisions by text, status, type, tag, path, date or branch, or exports them. |
-| `distill` | Before you push: turns undistilled decisions into learnings, ADRs, doc updates and a PR section, and proposes global decisions. `distill global` compares all your projects. |
+| `distill` | Before you push: walks you through the proposed decisions one by one to accept, reject or fix them, then turns undistilled decisions into learnings, ADRs, doc updates and a PR section, and proposes global decisions. `distill global` compares all your projects. |
 | `verify` | Lints the store and checks every accepted decision against the current code. |
 | `setup` | Creates the store, registers the project, offers a line for your user-level agent file so your agent knows to use micro-dr, and offers a reminder before `git push`. |
 

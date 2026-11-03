@@ -17,5 +17,7 @@ count=$(awk '
   /^- distilled:/ { done = 1 }
   END { if (open && !done) n++; print n + 0 }
 ' "$@")
+proposed=$(cat "$@" | grep -c '^## .* · proposed · ')
 [ "${count:-0}" -gt 0 ] && echo "micro-dr: $count accepted decision(s) not distilled yet. Run micro-dr distill before opening the PR." >&2
+[ "${proposed:-0}" -gt 0 ] && echo "micro-dr: $proposed proposed decision(s) waiting for review. micro-dr distill goes through them." >&2
 exit 0

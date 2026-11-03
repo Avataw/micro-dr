@@ -16,7 +16,7 @@ compatibility: Requires git, and write access to the store outside the workspace
 | `track` | `references/track.md` | A decision is made, the user asks to record one, or an entry's status changes |
 | `inspect` | `references/inspect.md` | The user asks why something was decided, or names a microdr |
 | `list` | `references/list.md` | The user asks which decisions exist, or for an export |
-| `distill` | `references/distill.md` | The user is about to push or open a PR, or asks for it |
+| `distill` | `references/distill.md` | The user is about to push or open a PR, wants to go through proposed decisions, or asks for it |
 | `verify` | `references/verify.md` | The user asks whether decisions still hold |
 | `setup` | `references/setup.md` | The user asks for it |
 

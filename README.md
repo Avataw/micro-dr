@@ -31,13 +31,14 @@ npx skills add Avataw/micro-dr
 ```
 ~/.micro-dr/                    # or $MICRO_DR_HOME; a git repo of its own
 ├── config.yml
-├── global/{technical,product,design,practice}.md
+├── global/{technical,product,design,practice,team}.md
 └── projects/github.com/acme/shop/
     ├── project.yml
     ├── technical.md
     ├── product.md
     ├── design.md
     ├── practice.md
+    ├── team.md
     └── archive.md
 ```
 

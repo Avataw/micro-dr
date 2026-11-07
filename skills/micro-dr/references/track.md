@@ -14,14 +14,14 @@ When the store, or the project folder for a project entry, is missing, create it
 - It has no backup until it gets a private remote; offer to add one as in `setup` step 2.
 - Offer to add this line, shown word for word, to their user-level agent file: "Decisions are kept with the micro-dr skill. Use it to answer why something was decided, record decisions with micro-dr track whenever a change settles a choice between options, and run micro-dr distill before pushing or opening a pull request."
 
-1. Pick the type file: `technical`, `product`, `design` or `practice`. Tag decisions about how areas fit together (boundaries, protocols, data ownership) `architecture`. A `practice` entry naming none of the project's code, domain, team or customers goes to `global/practice.md`, the rest to the project. Ask only when it's ambiguous.
+1. Pick the type file: `technical`, `product`, `design`, `practice`, `team`, or an extra type from the store's `config.yml` `types`. A decision several people agreed on and hold each other to goes to `team`, with `decided-by: team <name>` when the team has a name. Tag decisions about how areas fit together (boundaries, protocols, data ownership) `architecture`. A `practice` entry naming none of the project's code, domain, team or customers goes to `global/practice.md`, the rest to the project. Ask only when it's ambiguous.
 2. Take the reason from the user. When they gave none and asked you to record it, ask. Otherwise, or when you can't ask, write status `proposed` with `why: <reason?>` and ask in the end-of-task list. When they decline, leave `why` out. Never invent a reason, alternative or downside.
 3. Set `applies-to` to the paths the decision governs, from the code and docs it touches; `*` for a global entry.
 4. Pick tags, reusing existing ones: `grep -h '^- tags:' <store>/projects/<key>/*.md <store>/global/*.md`.
 5. Look for contradictions:
    - accepted entries in the project whose `applies-to` overlaps or that share a tag;
    - the repo: ADRs in `adr`, and a grep for the values and names the decision changes, e.g. a limit in a PRD or a config file;
-   - `global/`. A conflict there is only worth mentioning; the project's decision wins.
+   - `global/`. A conflict there is only worth mentioning; the project's decision wins, unless `project.yml` says `precedence: global`, in which case the global entry wins and the new one is `proposed` with the conflict named.
    - for a global entry: the other `global/` entries and the files in the store's `config.yml` `learnings`.
 6. On a contradiction, when the user asked you to record it, stop and ask in plain words. When recording on your own, or when you can't ask, write status `proposed`, name the conflict in `why`, and raise it in the end-of-task list. An explicit instruction like "replace X with Y" already picks the replacement. The options:
    - Change the new decision.

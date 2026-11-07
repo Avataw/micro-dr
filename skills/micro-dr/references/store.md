@@ -6,18 +6,20 @@ The store is `$MICRO_DR_HOME`, else `~/.micro-dr`. It's a git repo of its own an
 
 ```
 ~/.micro-dr/
-├── config.yml                  # learnings: user-level agent files or skills; tracking: auto (default) or offer
+├── config.yml                  # learnings: user-level agent files or skills; tracking: auto (default) or offer; types: extra type files
 ├── global/                     # decisions that hold across projects
 │   ├── technical.md
 │   ├── product.md
 │   ├── design.md
-│   └── practice.md
+│   ├── practice.md
+│   └── team.md
 └── projects/<key>/
     ├── project.yml
     ├── technical.md            # architectural decisions too, tagged `architecture`
     ├── product.md
     ├── design.md
     ├── practice.md
+    ├── team.md
     └── archive.md              # superseded and rejected entries
 ```
 
@@ -29,6 +31,7 @@ The store is `$MICRO_DR_HOME`, else `~/.micro-dr`. It's a git repo of its own an
 root: 3f2a1c9e8d7b6a5f4e3d2c1b0a9f8e7d6c5b4a39   # full sha: last line of `git rev-list --max-parents=0 HEAD`
 adr: docs/adr         # the repo's ADR folder, or null
 learnings: []         # repo files that receive learnings; empty: the root agent file
+precedence: project   # who wins a conflict with a global entry: project (default) or global
 ```
 
 To find the project, look for `projects/<key>/` and check that its `root` matches. When it's missing or doesn't match, search `projects/**/project.yml` for this repo's `root`; a match means the remote changed, so use that folder and tell the user. In a shallow clone the root is wrong; say so instead of creating a project.
@@ -54,6 +57,9 @@ Type files:
 - `product`: what the product does and for whom (scope, pricing, limits, support).
 - `design`: what users see and how the UI behaves.
 - `practice`: how the work is done (reviews, PRs, writing, comments, testing habits, tooling, where decisions and docs live). Global when it names none of a project's code, domain, team or customers.
+- `team`: what a group of people agreed on together and holds each other to: ownership, who reviews or approves what, meeting outcomes, on-call, shared conventions. `practice` is how the user works; `team` is what binds several people. Usually a project file; global when it binds a team across projects.
+
+Extra types: the store's `config.yml` may list more as `types:`, one per line as `<name>: <what it holds>`, e.g. `ops: deploys, incidents and runbooks`. A name matches `[a-z][a-z0-9-]{0,23}` and is none of `archive`, `config`, `project`, `readme`, `notes`, `todo`, `index`, `changelog`. Its file is `<name>.md`, in `global/` or the project folder, and it works like the built-in types.
 
 Heading: `## <id> · <status> · <title>`.
 
@@ -71,7 +77,7 @@ Lines, in this order. `applies-to`, `tags`, `recorded` and `distilled` are fille
 | `why` | The reason, or `<reason?>` while it's missing |
 | `rejected` | Alternatives and why they lost |
 | `accepting` | The downside taken on |
-| `decided-by` | Who decided, when it wasn't the user |
+| `decided-by` | Who decided, when it wasn't the user: `team <name>`, a person's name, `<role> (agent)` for an agent acting in a role, or `agent`. Several, comma-separated, e.g. `design role (agent), accepted by the user` |
 | `decided` | `<YYYY-MM-DD>`, when the decision predates the entry |
 | `pending` | What still has to change in the code or docs |
 | `recorded` | `<YYYY-MM-DD> · <branch> · <short project HEAD sha>`, or `<YYYY-MM-DD> · <project key>` in `global/`, or just the date outside a repo |

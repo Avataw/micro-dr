@@ -10,6 +10,7 @@ The store is personal, so the repo learns about decisions mostly through what `d
 4. Build these lists:
    - **Learnings**: rules an agent working in this repo would otherwise get wrong. More entries behind a rule rank it higher. Skip anything that only repeats a value the code or config already states.
    - **ADRs**: technical entries tagged `architecture`, or whose `applies-to` spans several top-level code folders; docs don't count. With `adr` unset, ask for the folder.
+   - **Team**: accepted `team` entries go to the repo's shared files the team reads, e.g. CONTRIBUTING or a team section of the root agent file, as learnings do.
    - **Docs**: docs that an entry makes stale, e.g. a PRD still naming the old limit.
    - **PR description**: a "Decisions" section summarising this branch's entries, one bullet each: the decision and why.
    - **User-level learnings**: rules from accepted `global/practice.md` entries for the files in the store's `config.yml` `learnings`, asking for them when empty. Skip a rule those files already state.
